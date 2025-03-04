@@ -1,0 +1,450 @@
+FishID,Age,Year,Species,Cohort,Region,Width,Core,Edge,formation_month
+AA399,1,2017,Lutjanus malabaricus,2016,Riau Archipelago,1889.313,248.092,184.478,10
+AA399,2,2018,Lutjanus malabaricus,2016,Riau Archipelago,496.183,248.092,184.478,10
+AA399,3,2019,Lutjanus malabaricus,2016,Riau Archipelago,337.15,248.092,184.478,10
+AA399,4,2020,Lutjanus malabaricus,2016,Riau Archipelago,248.092,248.092,184.478,10
+AA399,5,2021,Lutjanus malabaricus,2016,Riau Archipelago,222.646,248.092,184.478,10
+AA399,6,2021,Lutjanus malabaricus,2016,Riau Archipelago,184.478,248.092,184.478,10
+AA400,1,2017,Lutjanus malabaricus,2016,Riau Archipelago,1889.313,89.059,190.84,10
+AA400,2,2018,Lutjanus malabaricus,2016,Riau Archipelago,477.099,89.059,190.84,10
+AA400,3,2019,Lutjanus malabaricus,2016,Riau Archipelago,330.789,89.059,190.84,10
+AA400,4,2020,Lutjanus malabaricus,2016,Riau Archipelago,254.453,89.059,190.84,10
+AA400,5,2021,Lutjanus malabaricus,2016,Riau Archipelago,241.73,89.059,190.84,10
+AA400,6,2021,Lutjanus malabaricus,2016,Riau Archipelago,190.84,89.059,190.84,10
+AA402,1,2019,Lutjanus malabaricus,2018,Riau Archipelago,1171.477,133.701,165.535,10
+AA402,2,2020,Lutjanus malabaricus,2018,Riau Archipelago,515.705,133.701,165.535,10
+AA402,3,2021,Lutjanus malabaricus,2018,Riau Archipelago,343.803,133.701,165.535,10
+AA402,4,2021,Lutjanus malabaricus,2018,Riau Archipelago,165.535,133.701,165.535,10
+AA406,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1209.678,184.635,63.667,10
+AA406,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,273.769,184.635,63.667,10
+AA406,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,159.168,184.635,63.667,10
+AA406,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,127.335,184.635,63.667,10
+AA406,5,2021,Lutjanus malabaricus,2017,Riau Archipelago,63.667,184.635,63.667,10
+AA414,1,2019,Lutjanus malabaricus,2018,Riau Archipelago,1381.579,241.936,197.368,10
+AA414,2,2020,Lutjanus malabaricus,2018,Riau Archipelago,496.604,241.936,197.368,10
+AA414,3,2021,Lutjanus malabaricus,2018,Riau Archipelago,369.27,241.936,197.368,10
+AA414,4,2021,Lutjanus malabaricus,2018,Riau Archipelago,197.368,241.936,197.368,10
+AA415,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1380.407,165.394,171.756,10
+AA415,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,426.209,165.394,171.756,10
+AA415,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,292.621,165.394,171.756,10
+AA415,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,222.646,165.394,171.756,10
+AA415,5,2021,Lutjanus malabaricus,2017,Riau Archipelago,171.756,165.394,171.756,10
+AA621,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1495.863,324.634,159.134,10
+AA621,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,477.403,324.634,159.134,10
+AA621,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,248.25,324.634,159.134,10
+AA621,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,222.788,324.634,159.134,10
+AA621,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,159.134,324.634,159.134,10
+AA625,1,2016,Lutjanus malabaricus,2015,Riau Archipelago,1260.344,318.269,82.75,10
+AA625,2,2017,Lutjanus malabaricus,2015,Riau Archipelago,560.153,318.269,82.75,10
+AA625,3,2018,Lutjanus malabaricus,2015,Riau Archipelago,388.288,318.269,82.75,10
+AA625,4,2019,Lutjanus malabaricus,2015,Riau Archipelago,273.711,318.269,82.75,10
+AA625,5,2020,Lutjanus malabaricus,2015,Riau Archipelago,171.865,318.269,82.75,10
+AA625,6,2021,Lutjanus malabaricus,2015,Riau Archipelago,127.307,318.269,82.75,10
+AA625,7,2022,Lutjanus malabaricus,2015,Riau Archipelago,82.75,318.269,82.75,10
+AA632,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1304.902,210.057,152.769,10
+AA632,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,668.364,210.057,152.769,10
+AA632,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,337.365,210.057,152.769,10
+AA632,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,267.346,210.057,152.769,10
+AA632,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,152.769,210.057,152.769,10
+AA640,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1304.902,248.25,197.327,10
+AA640,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,477.403,248.25,197.327,10
+AA640,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,375.557,248.25,197.327,10
+AA640,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,318.269,248.25,197.327,10
+AA640,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,197.327,248.25,197.327,10
+AA775,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1050.287,210.057,159.134,10
+AA775,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,432.845,210.057,159.134,10
+AA775,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,267.346,210.057,159.134,10
+AA775,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,197.327,210.057,159.134,10
+AA775,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,159.134,210.057,159.134,10
+AA803,1,2017,Lutjanus malabaricus,2016,Riau Archipelago,1311.545,159.168,191.002,10
+AA803,2,2018,Lutjanus malabaricus,2016,Riau Archipelago,617.572,159.168,191.002,10
+AA803,3,2019,Lutjanus malabaricus,2016,Riau Archipelago,432.937,159.168,191.002,10
+AA803,4,2020,Lutjanus malabaricus,2016,Riau Archipelago,426.571,159.168,191.002,10
+AA803,5,2021,Lutjanus malabaricus,2016,Riau Archipelago,299.236,159.168,191.002,10
+AA803,6,2022,Lutjanus malabaricus,2016,Riau Archipelago,191.002,159.168,191.002,10
+AA807,1,2017,Lutjanus malabaricus,2016,Riau Archipelago,1025.043,44.567,63.667,10
+AA807,2,2018,Lutjanus malabaricus,2016,Riau Archipelago,458.404,44.567,63.667,10
+AA807,3,2019,Lutjanus malabaricus,2016,Riau Archipelago,337.436,44.567,63.667,10
+AA807,4,2020,Lutjanus malabaricus,2016,Riau Archipelago,222.835,44.567,63.667,10
+AA807,5,2021,Lutjanus malabaricus,2016,Riau Archipelago,241.936,44.567,63.667,10
+AA807,6,2022,Lutjanus malabaricus,2016,Riau Archipelago,63.667,44.567,63.667,10
+AA818,1,2017,Lutjanus malabaricus,2016,Riau Archipelago,959.746,266.949,120.763,10
+AA818,2,2018,Lutjanus malabaricus,2016,Riau Archipelago,438.559,266.949,120.763,10
+AA818,3,2019,Lutjanus malabaricus,2016,Riau Archipelago,228.814,266.949,120.763,10
+AA818,4,2020,Lutjanus malabaricus,2016,Riau Archipelago,209.746,266.949,120.763,10
+AA818,5,2021,Lutjanus malabaricus,2016,Riau Archipelago,197.034,266.949,120.763,10
+AA818,6,2022,Lutjanus malabaricus,2016,Riau Archipelago,120.763,266.949,120.763,10
+AA821,1,2017,Lutjanus malabaricus,2016,Riau Archipelago,1278.626,209.924,108.143,10
+AA821,2,2018,Lutjanus malabaricus,2016,Riau Archipelago,419.847,209.924,108.143,10
+AA821,3,2019,Lutjanus malabaricus,2016,Riau Archipelago,305.344,209.924,108.143,10
+AA821,4,2020,Lutjanus malabaricus,2016,Riau Archipelago,254.453,209.924,108.143,10
+AA821,5,2021,Lutjanus malabaricus,2016,Riau Archipelago,229.008,209.924,108.143,10
+AA821,6,2022,Lutjanus malabaricus,2016,Riau Archipelago,108.143,209.924,108.143,10
+AA826,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1368.846,216.469,101.868,10
+AA826,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,343.803,216.469,101.868,10
+AA826,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,216.469,216.469,101.868,10
+AA826,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,178.268,216.469,101.868,10
+AA826,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,101.868,216.469,101.868,10
+AA871,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1337.012,184.635,133.701,10
+AA871,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,439.304,184.635,133.701,10
+AA871,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,273.769,184.635,133.701,10
+AA871,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,184.635,184.635,133.701,10
+AA871,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,133.701,184.635,133.701,10
+AA994,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1501.273,203.562,146.31,10
+AA994,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,680.662,203.562,146.31,10
+AA994,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,324.428,203.562,146.31,10
+AA994,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,222.646,203.562,146.31,10
+AA994,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,146.31,203.562,146.31,10
+AB058,1,2015,Lutjanus malabaricus,2014,Riau Archipelago,1577.608,279.898,63.613,10
+AB058,2,2016,Lutjanus malabaricus,2014,Riau Archipelago,578.881,279.898,63.613,10
+AB058,3,2017,Lutjanus malabaricus,2014,Riau Archipelago,438.931,279.898,63.613,10
+AB058,4,2018,Lutjanus malabaricus,2014,Riau Archipelago,356.234,279.898,63.613,10
+AB058,5,2019,Lutjanus malabaricus,2014,Riau Archipelago,305.344,279.898,63.613,10
+AB058,6,2020,Lutjanus malabaricus,2014,Riau Archipelago,248.092,279.898,63.613,10
+AB058,7,2021,Lutjanus malabaricus,2014,Riau Archipelago,197.201,279.898,63.613,10
+AB058,8,2022,Lutjanus malabaricus,2014,Riau Archipelago,63.613,279.898,63.613,10
+AB174,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1307.937,139.683,146.032,10
+AB174,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,584.127,139.683,146.032,10
+AB174,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,323.81,139.683,146.032,10
+AB174,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,215.873,139.683,146.032,10
+AB174,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,146.032,139.683,146.032,10
+AB176,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1136.508,190.476,126.984,10
+AB176,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,387.302,190.476,126.984,10
+AB176,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,273.016,190.476,126.984,10
+AB176,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,184.127,190.476,126.984,10
+AB176,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,126.984,190.476,126.984,10
+AB177,1,2017,Lutjanus malabaricus,2016,Riau Archipelago,1219.306,273.074,107.959,10
+AB177,2,2018,Lutjanus malabaricus,2016,Riau Archipelago,457.24,273.074,107.959,10
+AB177,3,2019,Lutjanus malabaricus,2016,Riau Archipelago,266.723,273.074,107.959,10
+AB177,4,2020,Lutjanus malabaricus,2016,Riau Archipelago,203.218,273.074,107.959,10
+AB177,5,2021,Lutjanus malabaricus,2016,Riau Archipelago,152.413,273.074,107.959,10
+AB177,6,2022,Lutjanus malabaricus,2016,Riau Archipelago,107.959,273.074,107.959,10
+AB178,1,2019,Lutjanus malabaricus,2018,Riau Archipelago,1165.541,354.73,190.034,10
+AB178,2,2020,Lutjanus malabaricus,2018,Riau Archipelago,443.412,354.73,190.034,10
+AB178,3,2021,Lutjanus malabaricus,2018,Riau Archipelago,247.044,354.73,190.034,10
+AB178,4,2022,Lutjanus malabaricus,2018,Riau Archipelago,190.034,354.73,190.034,10
+AB187,1,2019,Lutjanus malabaricus,2018,Riau Archipelago,1408.629,76.142,145.939,10
+AB187,2,2020,Lutjanus malabaricus,2018,Riau Archipelago,469.543,76.142,145.939,10
+AB187,3,2021,Lutjanus malabaricus,2018,Riau Archipelago,190.355,76.142,145.939,10
+AB187,4,2022,Lutjanus malabaricus,2018,Riau Archipelago,107.868,76.142,145.939,10
+AB187,5,2022,Lutjanus malabaricus,2018,Riau Archipelago,145.939,76.142,145.939,10
+AB188,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1259.542,248.092,127.226,10
+AB188,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,426.209,248.092,127.226,10
+AB188,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,330.789,248.092,127.226,10
+AB188,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,216.285,248.092,127.226,10
+AB188,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,165.394,248.092,127.226,10
+AB188,6,2022,Lutjanus malabaricus,2017,Riau Archipelago,127.226,248.092,127.226,10
+AB190,1,2017,Lutjanus malabaricus,2016,Riau Archipelago,903.308,222.646,69.975,10
+AB190,2,2018,Lutjanus malabaricus,2016,Riau Archipelago,349.873,222.646,69.975,10
+AB190,3,2019,Lutjanus malabaricus,2016,Riau Archipelago,241.73,222.646,69.975,10
+AB190,4,2020,Lutjanus malabaricus,2016,Riau Archipelago,241.73,222.646,69.975,10
+AB190,5,2021,Lutjanus malabaricus,2016,Riau Archipelago,178.117,222.646,69.975,10
+AB190,6,2022,Lutjanus malabaricus,2016,Riau Archipelago,139.949,222.646,69.975,10
+AB190,7,2022,Lutjanus malabaricus,2016,Riau Archipelago,69.975,222.646,69.975,10
+AB192,1,2012,Lutjanus malabaricus,2011,Riau Archipelago,1154.822,247.462,57.107,10
+AB192,2,2013,Lutjanus malabaricus,2011,Riau Archipelago,336.294,247.462,57.107,10
+AB192,3,2014,Lutjanus malabaricus,2011,Riau Archipelago,247.462,247.462,57.107,10
+AB192,4,2015,Lutjanus malabaricus,2011,Riau Archipelago,133.249,247.462,57.107,10
+AB192,5,2016,Lutjanus malabaricus,2011,Riau Archipelago,107.868,247.462,57.107,10
+AB192,6,2017,Lutjanus malabaricus,2011,Riau Archipelago,82.487,247.462,57.107,10
+AB192,7,2018,Lutjanus malabaricus,2011,Riau Archipelago,76.142,247.462,57.107,10
+AB192,8,2019,Lutjanus malabaricus,2011,Riau Archipelago,95.178,247.462,57.107,10
+AB192,9,2020,Lutjanus malabaricus,2011,Riau Archipelago,88.832,247.462,57.107,10
+AB192,10,2021,Lutjanus malabaricus,2011,Riau Archipelago,88.832,247.462,57.107,10
+AB192,11,2022,Lutjanus malabaricus,2011,Riau Archipelago,50.761,247.462,57.107,10
+AB192,12,2022,Lutjanus malabaricus,2011,Riau Archipelago,57.107,247.462,57.107,10
+AB194,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1497.462,209.391,88.832,10
+AB194,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,615.482,209.391,88.832,10
+AB194,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,266.497,209.391,88.832,10
+AB194,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,203.046,209.391,88.832,10
+AB194,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,196.701,209.391,88.832,10
+AB194,6,2022,Lutjanus malabaricus,2017,Riau Archipelago,88.832,209.391,88.832,10
+AB195,1,2019,Lutjanus malabaricus,2018,Riau Archipelago,1143.099,292.125,146.063,10
+AB195,2,2020,Lutjanus malabaricus,2018,Riau Archipelago,482.642,292.125,146.063,10
+AB195,3,2021,Lutjanus malabaricus,2018,Riau Archipelago,381.033,292.125,146.063,10
+AB195,4,2022,Lutjanus malabaricus,2018,Riau Archipelago,247.671,292.125,146.063,10
+AB195,5,2022,Lutjanus malabaricus,2018,Riau Archipelago,146.063,292.125,146.063,10
+AB207,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1257.409,171.465,107.959,10
+AB207,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,368.332,171.465,107.959,10
+AB207,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,304.826,171.465,107.959,10
+AB207,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,241.321,171.465,107.959,10
+AB207,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,171.465,171.465,107.959,10
+AB207,6,2022,Lutjanus malabaricus,2017,Riau Archipelago,107.959,171.465,107.959,10
+AB208,1,2014,Lutjanus malabaricus,2013,Riau Archipelago,983.503,152.284,50.761,10
+AB208,2,2015,Lutjanus malabaricus,2013,Riau Archipelago,355.33,152.284,50.761,10
+AB208,3,2016,Lutjanus malabaricus,2013,Riau Archipelago,241.117,152.284,50.761,10
+AB208,4,2017,Lutjanus malabaricus,2013,Riau Archipelago,171.32,152.284,50.761,10
+AB208,5,2018,Lutjanus malabaricus,2013,Riau Archipelago,158.629,152.284,50.761,10
+AB208,6,2019,Lutjanus malabaricus,2013,Riau Archipelago,196.701,152.284,50.761,10
+AB208,7,2020,Lutjanus malabaricus,2013,Riau Archipelago,184.01,152.284,50.761,10
+AB208,8,2021,Lutjanus malabaricus,2013,Riau Archipelago,158.629,152.284,50.761,10
+AB208,9,2022,Lutjanus malabaricus,2013,Riau Archipelago,114.213,152.284,50.761,10
+AB208,10,2022,Lutjanus malabaricus,2013,Riau Archipelago,50.761,152.284,50.761,10
+AB209,1,2013,Lutjanus malabaricus,2012,Riau Archipelago,857.324,165.114,82.557,10
+AB209,2,2014,Lutjanus malabaricus,2012,Riau Archipelago,342.93,165.114,82.557,10
+AB209,3,2015,Lutjanus malabaricus,2012,Riau Archipelago,165.114,165.114,82.557,10
+AB209,4,2016,Lutjanus malabaricus,2012,Riau Archipelago,146.063,165.114,82.557,10
+AB209,5,2017,Lutjanus malabaricus,2012,Riau Archipelago,139.712,165.114,82.557,10
+AB209,6,2018,Lutjanus malabaricus,2012,Riau Archipelago,165.114,165.114,82.557,10
+AB209,7,2019,Lutjanus malabaricus,2012,Riau Archipelago,158.764,165.114,82.557,10
+AB209,8,2020,Lutjanus malabaricus,2012,Riau Archipelago,171.465,165.114,82.557,10
+AB209,9,2021,Lutjanus malabaricus,2012,Riau Archipelago,152.413,165.114,82.557,10
+AB209,10,2022,Lutjanus malabaricus,2012,Riau Archipelago,139.712,165.114,82.557,10
+AB209,11,2022,Lutjanus malabaricus,2012,Riau Archipelago,82.557,165.114,82.557,10
+AB210,1,2018,Lutjanus malabaricus,2017,Riau Archipelago,1408.629,247.462,133.249,10
+AB210,2,2019,Lutjanus malabaricus,2017,Riau Archipelago,412.437,247.462,133.249,10
+AB210,3,2020,Lutjanus malabaricus,2017,Riau Archipelago,241.117,247.462,133.249,10
+AB210,4,2021,Lutjanus malabaricus,2017,Riau Archipelago,164.975,247.462,133.249,10
+AB210,5,2022,Lutjanus malabaricus,2017,Riau Archipelago,203.046,247.462,133.249,10
+AB210,6,2022,Lutjanus malabaricus,2017,Riau Archipelago,133.249,247.462,133.249,10
+AB410,1,2023,Lutjanus malabaricus,2022,Riau Archipelago,2063.091,182.965,2063.091,10
+AB607,1,2018,Lutjanus malabaricus,2017,Sorong,1751.269,234.772,164.975,10
+AB607,2,2019,Lutjanus malabaricus,2017,Sorong,621.827,234.772,164.975,10
+AB607,3,2020,Lutjanus malabaricus,2017,Sorong,628.172,234.772,164.975,10
+AB607,4,2021,Lutjanus malabaricus,2017,Sorong,437.817,234.772,164.975,10
+AB607,5,2022,Lutjanus malabaricus,2017,Sorong,260.152,234.772,164.975,10
+AB607,6,2023,Lutjanus malabaricus,2017,Sorong,164.975,234.772,164.975,10
+AB608,1,2012,Lutjanus malabaricus,2011,Sorong,1060.991,254.13,69.886,10
+AB608,2,2013,Lutjanus malabaricus,2011,Sorong,432.02,254.13,69.886,10
+AB608,3,2014,Lutjanus malabaricus,2011,Sorong,330.368,254.13,69.886,10
+AB608,4,2015,Lutjanus malabaricus,2011,Sorong,241.423,254.13,69.886,10
+AB608,5,2016,Lutjanus malabaricus,2011,Sorong,165.184,254.13,69.886,10
+AB608,6,2017,Lutjanus malabaricus,2011,Sorong,133.418,254.13,69.886,10
+AB608,7,2018,Lutjanus malabaricus,2011,Sorong,101.652,254.13,69.886,10
+AB608,8,2019,Lutjanus malabaricus,2011,Sorong,88.945,254.13,69.886,10
+AB608,9,2020,Lutjanus malabaricus,2011,Sorong,88.945,254.13,69.886,10
+AB608,10,2021,Lutjanus malabaricus,2011,Sorong,101.652,254.13,69.886,10
+AB608,11,2022,Lutjanus malabaricus,2011,Sorong,76.239,254.13,69.886,10
+AB608,12,2023,Lutjanus malabaricus,2011,Sorong,69.886,254.13,69.886,10
+AB609,1,2018,Lutjanus malabaricus,2017,Sorong,1513.936,139.358,190.034,10
+AB609,2,2019,Lutjanus malabaricus,2017,Sorong,589.105,139.358,190.034,10
+AB609,3,2020,Lutjanus malabaricus,2017,Sorong,329.392,139.358,190.034,10
+AB609,4,2021,Lutjanus malabaricus,2017,Sorong,323.057,139.358,190.034,10
+AB609,5,2022,Lutjanus malabaricus,2017,Sorong,209.037,139.358,190.034,10
+AB609,6,2023,Lutjanus malabaricus,2017,Sorong,190.034,139.358,190.034,10
+AB610,1,2019,Lutjanus malabaricus,2018,Sorong,1135.066,190.235,126.823,10
+AB610,2,2020,Lutjanus malabaricus,2018,Sorong,431.198,190.235,126.823,10
+AB610,3,2021,Lutjanus malabaricus,2018,Sorong,279.011,190.235,126.823,10
+AB610,4,2022,Lutjanus malabaricus,2018,Sorong,171.211,190.235,126.823,10
+AB610,5,2023,Lutjanus malabaricus,2018,Sorong,126.823,190.235,126.823,10
+AB611,1,2007,Lutjanus malabaricus,2006,Sorong,1349.239,158.361,57.01,10
+AB611,2,2008,Lutjanus malabaricus,2006,Sorong,538.429,158.361,57.01,10
+AB611,3,2009,Lutjanus malabaricus,2006,Sorong,285.051,158.361,57.01,10
+AB611,4,2010,Lutjanus malabaricus,2006,Sorong,266.047,158.361,57.01,10
+AB611,5,2011,Lutjanus malabaricus,2006,Sorong,158.361,158.361,57.01,10
+AB611,6,2012,Lutjanus malabaricus,2006,Sorong,88.682,158.361,57.01,10
+AB611,7,2013,Lutjanus malabaricus,2006,Sorong,82.348,158.361,57.01,10
+AB611,8,2014,Lutjanus malabaricus,2006,Sorong,88.682,158.361,57.01,10
+AB611,9,2015,Lutjanus malabaricus,2006,Sorong,76.013,158.361,57.01,10
+AB611,10,2016,Lutjanus malabaricus,2006,Sorong,82.348,158.361,57.01,10
+AB611,11,2017,Lutjanus malabaricus,2006,Sorong,76.013,158.361,57.01,10
+AB611,12,2018,Lutjanus malabaricus,2006,Sorong,69.679,158.361,57.01,10
+AB611,13,2019,Lutjanus malabaricus,2006,Sorong,76.013,158.361,57.01,10
+AB611,14,2020,Lutjanus malabaricus,2006,Sorong,82.348,158.361,57.01,10
+AB611,15,2021,Lutjanus malabaricus,2006,Sorong,76.013,158.361,57.01,10
+AB611,16,2022,Lutjanus malabaricus,2006,Sorong,63.345,158.361,57.01,10
+AB611,17,2023,Lutjanus malabaricus,2006,Sorong,57.01,158.361,57.01,10
+AB612,1,2015,Lutjanus malabaricus,2014,Sorong,1465.736,171.32,63.452,10
+AB612,2,2016,Lutjanus malabaricus,2014,Sorong,469.543,171.32,63.452,10
+AB612,3,2017,Lutjanus malabaricus,2014,Sorong,272.843,171.32,63.452,10
+AB612,4,2018,Lutjanus malabaricus,2014,Sorong,164.975,171.32,63.452,10
+AB612,5,2019,Lutjanus malabaricus,2014,Sorong,145.939,171.32,63.452,10
+AB612,6,2020,Lutjanus malabaricus,2014,Sorong,114.213,171.32,63.452,10
+AB612,7,2021,Lutjanus malabaricus,2014,Sorong,133.249,171.32,63.452,10
+AB612,8,2022,Lutjanus malabaricus,2014,Sorong,88.832,171.32,63.452,10
+AB612,9,2023,Lutjanus malabaricus,2014,Sorong,63.452,171.32,63.452,10
+AB613,1,2019,Lutjanus malabaricus,2018,Sorong,1380.912,126.689,76.013,10
+AB613,2,2020,Lutjanus malabaricus,2018,Sorong,437.078,126.689,76.013,10
+AB613,3,2021,Lutjanus malabaricus,2018,Sorong,202.703,126.689,76.013,10
+AB613,4,2022,Lutjanus malabaricus,2018,Sorong,152.027,126.689,76.013,10
+AB613,5,2023,Lutjanus malabaricus,2018,Sorong,76.013,126.689,76.013,10
+AB614,1,2017,Lutjanus malabaricus,2016,Sorong,1097.715,260.152,63.452,10
+AB614,2,2018,Lutjanus malabaricus,2016,Sorong,558.375,260.152,63.452,10
+AB614,3,2019,Lutjanus malabaricus,2016,Sorong,298.223,260.152,63.452,10
+AB614,4,2020,Lutjanus malabaricus,2016,Sorong,209.391,260.152,63.452,10
+AB614,5,2021,Lutjanus malabaricus,2016,Sorong,152.284,260.152,63.452,10
+AB614,6,2022,Lutjanus malabaricus,2016,Sorong,101.523,260.152,63.452,10
+AB614,7,2023,Lutjanus malabaricus,2016,Sorong,63.452,260.152,63.452,10
+AB615,1,2020,Lutjanus malabaricus,2019,Sorong,1185.795,279.011,126.823,10
+AB615,2,2021,Lutjanus malabaricus,2019,Sorong,532.657,279.011,126.823,10
+AB615,3,2022,Lutjanus malabaricus,2019,Sorong,221.94,279.011,126.823,10
+AB615,4,2023,Lutjanus malabaricus,2019,Sorong,126.823,279.011,126.823,10
+AB616,1,2018,Lutjanus malabaricus,2017,Sorong,1604.312,266.328,164.87,10
+AB616,2,2019,Lutjanus malabaricus,2017,Sorong,456.563,266.328,164.87,10
+AB616,3,2020,Lutjanus malabaricus,2017,Sorong,272.67,266.328,164.87,10
+AB616,4,2021,Lutjanus malabaricus,2017,Sorong,253.646,266.328,164.87,10
+AB616,5,2022,Lutjanus malabaricus,2017,Sorong,177.552,266.328,164.87,10
+AB616,6,2023,Lutjanus malabaricus,2017,Sorong,164.87,266.328,164.87,10
+AB617,1,2016,Lutjanus malabaricus,2015,Sorong,1286.982,145.816,82.418,10
+AB617,2,2017,Lutjanus malabaricus,2015,Sorong,374.049,145.816,82.418,10
+AB617,3,2018,Lutjanus malabaricus,2015,Sorong,304.311,145.816,82.418,10
+AB617,4,2019,Lutjanus malabaricus,2015,Sorong,266.272,145.816,82.418,10
+AB617,5,2020,Lutjanus malabaricus,2015,Sorong,234.573,145.816,82.418,10
+AB617,6,2021,Lutjanus malabaricus,2015,Sorong,139.476,145.816,82.418,10
+AB617,7,2022,Lutjanus malabaricus,2015,Sorong,133.136,145.816,82.418,10
+AB617,8,2023,Lutjanus malabaricus,2015,Sorong,82.418,145.816,82.418,10
+AB618,1,2002,Lutjanus malabaricus,2001,Sorong,1286.982,291.631,50.718,10
+AB618,2,2003,Lutjanus malabaricus,2001,Sorong,488.166,291.631,50.718,10
+AB618,3,2004,Lutjanus malabaricus,2001,Sorong,380.389,291.631,50.718,10
+AB618,4,2005,Lutjanus malabaricus,2001,Sorong,164.835,291.631,50.718,10
+AB618,5,2006,Lutjanus malabaricus,2001,Sorong,152.155,291.631,50.718,10
+AB618,6,2007,Lutjanus malabaricus,2001,Sorong,158.495,291.631,50.718,10
+AB618,7,2008,Lutjanus malabaricus,2001,Sorong,114.117,291.631,50.718,10
+AB618,8,2009,Lutjanus malabaricus,2001,Sorong,95.097,291.631,50.718,10
+AB618,9,2010,Lutjanus malabaricus,2001,Sorong,107.777,291.631,50.718,10
+AB618,10,2011,Lutjanus malabaricus,2001,Sorong,88.757,291.631,50.718,10
+AB618,11,2012,Lutjanus malabaricus,2001,Sorong,88.757,291.631,50.718,10
+AB618,12,2013,Lutjanus malabaricus,2001,Sorong,88.757,291.631,50.718,10
+AB618,13,2014,Lutjanus malabaricus,2001,Sorong,69.738,291.631,50.718,10
+AB618,14,2015,Lutjanus malabaricus,2001,Sorong,63.398,291.631,50.718,10
+AB618,15,2016,Lutjanus malabaricus,2001,Sorong,63.398,291.631,50.718,10
+AB618,16,2017,Lutjanus malabaricus,2001,Sorong,63.398,291.631,50.718,10
+AB618,17,2018,Lutjanus malabaricus,2001,Sorong,63.398,291.631,50.718,10
+AB618,18,2019,Lutjanus malabaricus,2001,Sorong,76.078,291.631,50.718,10
+AB618,19,2020,Lutjanus malabaricus,2001,Sorong,63.398,291.631,50.718,10
+AB618,20,2021,Lutjanus malabaricus,2001,Sorong,69.738,291.631,50.718,10
+AB618,21,2022,Lutjanus malabaricus,2001,Sorong,63.398,291.631,50.718,10
+AB618,22,2023,Lutjanus malabaricus,2001,Sorong,50.718,291.631,50.718,10
+AB619,1,2017,Lutjanus malabaricus,2016,Sorong,1593.65,253.968,120.635,10
+AB619,2,2018,Lutjanus malabaricus,2016,Sorong,469.841,253.968,120.635,10
+AB619,3,2019,Lutjanus malabaricus,2016,Sorong,285.714,253.968,120.635,10
+AB619,4,2020,Lutjanus malabaricus,2016,Sorong,203.175,253.968,120.635,10
+AB619,5,2021,Lutjanus malabaricus,2016,Sorong,190.476,253.968,120.635,10
+AB619,6,2022,Lutjanus malabaricus,2016,Sorong,152.381,253.968,120.635,10
+AB619,7,2023,Lutjanus malabaricus,2016,Sorong,120.635,253.968,120.635,10
+AB620,1,2017,Lutjanus malabaricus,2016,Sorong,1370.558,152.284,95.178,10
+AB620,2,2018,Lutjanus malabaricus,2016,Sorong,463.198,152.284,95.178,10
+AB620,3,2019,Lutjanus malabaricus,2016,Sorong,253.807,152.284,95.178,10
+AB620,4,2020,Lutjanus malabaricus,2016,Sorong,177.665,152.284,95.178,10
+AB620,5,2021,Lutjanus malabaricus,2016,Sorong,158.629,152.284,95.178,10
+AB620,6,2022,Lutjanus malabaricus,2016,Sorong,126.904,152.284,95.178,10
+AB620,7,2023,Lutjanus malabaricus,2016,Sorong,95.178,152.284,95.178,10
+AB621,1,2013,Lutjanus malabaricus,2012,Sorong,1170.886,145.57,113.924,10
+AB621,2,2014,Lutjanus malabaricus,2012,Sorong,449.367,145.57,113.924,10
+AB621,3,2015,Lutjanus malabaricus,2012,Sorong,265.823,145.57,113.924,10
+AB621,4,2016,Lutjanus malabaricus,2012,Sorong,221.519,145.57,113.924,10
+AB621,5,2017,Lutjanus malabaricus,2012,Sorong,164.557,145.57,113.924,10
+AB621,6,2018,Lutjanus malabaricus,2012,Sorong,107.595,145.57,113.924,10
+AB621,7,2019,Lutjanus malabaricus,2012,Sorong,101.266,145.57,113.924,10
+AB621,8,2020,Lutjanus malabaricus,2012,Sorong,145.57,145.57,113.924,10
+AB621,9,2021,Lutjanus malabaricus,2012,Sorong,113.924,145.57,113.924,10
+AB621,10,2022,Lutjanus malabaricus,2012,Sorong,94.937,145.57,113.924,10
+AB621,11,2023,Lutjanus malabaricus,2012,Sorong,113.924,145.57,113.924,10
+AB622,1,2018,Lutjanus malabaricus,2017,Sorong,1210.393,101.394,114.068,10
+AB622,2,2019,Lutjanus malabaricus,2017,Sorong,354.879,101.394,114.068,10
+AB622,3,2020,Lutjanus malabaricus,2017,Sorong,221.8,101.394,114.068,10
+AB622,4,2021,Lutjanus malabaricus,2017,Sorong,158.428,101.394,114.068,10
+AB622,5,2022,Lutjanus malabaricus,2017,Sorong,145.754,101.394,114.068,10
+AB622,6,2023,Lutjanus malabaricus,2017,Sorong,114.068,101.394,114.068,10
+AB623,1,2016,Lutjanus malabaricus,2015,Sorong,1205.584,222.081,203.046,10
+AB623,2,2017,Lutjanus malabaricus,2015,Sorong,539.34,222.081,203.046,10
+AB623,3,2018,Lutjanus malabaricus,2015,Sorong,266.497,222.081,203.046,10
+AB623,4,2019,Lutjanus malabaricus,2015,Sorong,266.497,222.081,203.046,10
+AB623,5,2020,Lutjanus malabaricus,2015,Sorong,317.259,222.081,203.046,10
+AB623,6,2021,Lutjanus malabaricus,2015,Sorong,215.736,222.081,203.046,10
+AB623,7,2022,Lutjanus malabaricus,2015,Sorong,215.736,222.081,203.046,10
+AB623,8,2023,Lutjanus malabaricus,2015,Sorong,203.046,222.081,203.046,10
+AB624,1,2017,Lutjanus malabaricus,2016,Sorong,1472.081,190.355,126.904,10
+AB624,2,2018,Lutjanus malabaricus,2016,Sorong,602.792,190.355,126.904,10
+AB624,3,2019,Lutjanus malabaricus,2016,Sorong,323.604,190.355,126.904,10
+AB624,4,2020,Lutjanus malabaricus,2016,Sorong,310.914,190.355,126.904,10
+AB624,5,2021,Lutjanus malabaricus,2016,Sorong,209.391,190.355,126.904,10
+AB624,6,2022,Lutjanus malabaricus,2016,Sorong,164.975,190.355,126.904,10
+AB624,7,2023,Lutjanus malabaricus,2016,Sorong,126.904,190.355,126.904,10
+AB625,1,2020,Lutjanus malabaricus,2019,Sorong,1395.054,291.693,190.235,10
+AB625,2,2021,Lutjanus malabaricus,2019,Sorong,519.975,291.693,190.235,10
+AB625,3,2022,Lutjanus malabaricus,2019,Sorong,285.352,291.693,190.235,10
+AB625,4,2023,Lutjanus malabaricus,2019,Sorong,190.235,291.693,190.235,10
+AB626,1,2015,Lutjanus malabaricus,2014,Sorong,1312.619,221.94,107.8,10
+AB626,2,2016,Lutjanus malabaricus,2014,Sorong,513.633,221.94,107.8,10
+AB626,3,2017,Lutjanus malabaricus,2014,Sorong,323.399,221.94,107.8,10
+AB626,4,2018,Lutjanus malabaricus,2014,Sorong,215.599,221.94,107.8,10
+AB626,5,2019,Lutjanus malabaricus,2014,Sorong,139.505,221.94,107.8,10
+AB626,6,2020,Lutjanus malabaricus,2014,Sorong,183.893,221.94,107.8,10
+AB626,7,2021,Lutjanus malabaricus,2014,Sorong,152.188,221.94,107.8,10
+AB626,8,2022,Lutjanus malabaricus,2014,Sorong,101.458,221.94,107.8,10
+AB626,9,2023,Lutjanus malabaricus,2014,Sorong,107.8,221.94,107.8,10
+AB627,1,2014,Lutjanus malabaricus,2013,Sorong,1179.454,240.964,63.412,10
+AB627,2,2015,Lutjanus malabaricus,2013,Sorong,577.045,240.964,63.412,10
+AB627,3,2016,Lutjanus malabaricus,2013,Sorong,285.352,240.964,63.412,10
+AB627,4,2017,Lutjanus malabaricus,2013,Sorong,133.164,240.964,63.412,10
+AB627,5,2018,Lutjanus malabaricus,2013,Sorong,107.8,240.964,63.412,10
+AB627,6,2019,Lutjanus malabaricus,2013,Sorong,114.141,240.964,63.412,10
+AB627,7,2020,Lutjanus malabaricus,2013,Sorong,101.458,240.964,63.412,10
+AB627,8,2021,Lutjanus malabaricus,2013,Sorong,101.458,240.964,63.412,10
+AB627,9,2022,Lutjanus malabaricus,2013,Sorong,95.117,240.964,63.412,10
+AB627,10,2023,Lutjanus malabaricus,2013,Sorong,63.412,240.964,63.412,10
+AB628,1,2019,Lutjanus malabaricus,2018,Sorong,1204.819,291.693,145.847,10
+AB628,2,2020,Lutjanus malabaricus,2018,Sorong,462.904,291.693,145.847,10
+AB628,3,2021,Lutjanus malabaricus,2018,Sorong,380.469,291.693,145.847,10
+AB628,4,2022,Lutjanus malabaricus,2018,Sorong,298.034,291.693,145.847,10
+AB628,5,2023,Lutjanus malabaricus,2018,Sorong,145.847,291.693,145.847,10
+AB629,1,2016,Lutjanus malabaricus,2015,Sorong,1326.142,260.152,57.107,10
+AB629,2,2017,Lutjanus malabaricus,2015,Sorong,532.995,260.152,57.107,10
+AB629,3,2018,Lutjanus malabaricus,2015,Sorong,323.604,260.152,57.107,10
+AB629,4,2019,Lutjanus malabaricus,2015,Sorong,158.629,260.152,57.107,10
+AB629,5,2020,Lutjanus malabaricus,2015,Sorong,133.249,260.152,57.107,10
+AB629,6,2021,Lutjanus malabaricus,2015,Sorong,101.523,260.152,57.107,10
+AB629,7,2022,Lutjanus malabaricus,2015,Sorong,114.213,260.152,57.107,10
+AB629,8,2023,Lutjanus malabaricus,2015,Sorong,57.107,260.152,57.107,10
+AB630,1,2015,Lutjanus malabaricus,2014,Sorong,1079.365,215.873,133.333,10
+AB630,2,2016,Lutjanus malabaricus,2014,Sorong,469.841,215.873,133.333,10
+AB630,3,2017,Lutjanus malabaricus,2014,Sorong,317.46,215.873,133.333,10
+AB630,4,2018,Lutjanus malabaricus,2014,Sorong,292.063,215.873,133.333,10
+AB630,5,2019,Lutjanus malabaricus,2014,Sorong,209.524,215.873,133.333,10
+AB630,6,2020,Lutjanus malabaricus,2014,Sorong,139.683,215.873,133.333,10
+AB630,7,2021,Lutjanus malabaricus,2014,Sorong,152.381,215.873,133.333,10
+AB630,8,2022,Lutjanus malabaricus,2014,Sorong,126.984,215.873,133.333,10
+AB630,9,2023,Lutjanus malabaricus,2014,Sorong,133.333,215.873,133.333,10
+AB631,1,2019,Lutjanus malabaricus,2018,Sorong,1212.698,266.667,126.984,10
+AB631,2,2020,Lutjanus malabaricus,2018,Sorong,438.095,266.667,126.984,10
+AB631,3,2021,Lutjanus malabaricus,2018,Sorong,349.206,266.667,126.984,10
+AB631,4,2022,Lutjanus malabaricus,2018,Sorong,165.079,266.667,126.984,10
+AB631,5,2023,Lutjanus malabaricus,2018,Sorong,126.984,266.667,126.984,10
+AB633,1,2013,Lutjanus malabaricus,2012,Sorong,1092.063,139.682,114.286,10
+AB633,2,2014,Lutjanus malabaricus,2012,Sorong,546.032,139.682,114.286,10
+AB633,3,2015,Lutjanus malabaricus,2012,Sorong,228.571,139.682,114.286,10
+AB633,4,2016,Lutjanus malabaricus,2012,Sorong,228.571,139.682,114.286,10
+AB633,5,2017,Lutjanus malabaricus,2012,Sorong,158.73,139.682,114.286,10
+AB633,6,2018,Lutjanus malabaricus,2012,Sorong,133.333,139.682,114.286,10
+AB633,7,2019,Lutjanus malabaricus,2012,Sorong,120.635,139.682,114.286,10
+AB633,8,2020,Lutjanus malabaricus,2012,Sorong,133.333,139.682,114.286,10
+AB633,9,2021,Lutjanus malabaricus,2012,Sorong,126.984,139.682,114.286,10
+AB633,10,2022,Lutjanus malabaricus,2012,Sorong,114.286,139.682,114.286,10
+AB633,11,2023,Lutjanus malabaricus,2012,Sorong,114.286,139.682,114.286,10
+AB634,1,2020,Lutjanus malabaricus,2019,Sorong,1269.035,82.487,101.523,10
+AB634,2,2021,Lutjanus malabaricus,2019,Sorong,450.507,82.487,101.523,10
+AB634,3,2022,Lutjanus malabaricus,2019,Sorong,247.462,82.487,101.523,10
+AB634,4,2023,Lutjanus malabaricus,2019,Sorong,101.523,82.487,101.523,10
+AB635,1,2018,Lutjanus malabaricus,2017,Sorong,1651.842,209.657,101.652,10
+AB635,2,2019,Lutjanus malabaricus,2017,Sorong,387.548,209.657,101.652,10
+AB635,3,2020,Lutjanus malabaricus,2017,Sorong,355.781,209.657,101.652,10
+AB635,4,2021,Lutjanus malabaricus,2017,Sorong,209.657,209.657,101.652,10
+AB635,5,2022,Lutjanus malabaricus,2017,Sorong,101.652,209.657,101.652,10
+AB635,6,2023,Lutjanus malabaricus,2017,Sorong,101.652,209.657,101.652,10
+AB636,1,2019,Lutjanus malabaricus,2018,Sorong,1384.127,241.27,88.889,10
+AB636,2,2020,Lutjanus malabaricus,2018,Sorong,431.746,241.27,88.889,10
+AB636,3,2021,Lutjanus malabaricus,2018,Sorong,253.968,241.27,88.889,10
+AB636,4,2022,Lutjanus malabaricus,2018,Sorong,120.635,241.27,88.889,10
+AB636,5,2023,Lutjanus malabaricus,2018,Sorong,88.889,241.27,88.889,10
+AB637,1,2016,Lutjanus malabaricus,2015,Sorong,1676.545,120.66,139.712,10
+AB637,2,2017,Lutjanus malabaricus,2015,Sorong,368.332,120.66,139.712,10
+AB637,3,2018,Lutjanus malabaricus,2015,Sorong,247.671,120.66,139.712,10
+AB637,4,2019,Lutjanus malabaricus,2015,Sorong,203.218,120.66,139.712,10
+AB637,5,2020,Lutjanus malabaricus,2015,Sorong,120.66,120.66,139.712,10
+AB637,6,2021,Lutjanus malabaricus,2015,Sorong,133.362,120.66,139.712,10
+AB637,7,2022,Lutjanus malabaricus,2015,Sorong,146.063,120.66,139.712,10
+AB637,8,2023,Lutjanus malabaricus,2015,Sorong,139.712,120.66,139.712,10
+AB638,1,2019,Lutjanus malabaricus,2018,Sorong,1479.365,311.111,133.333,10
+AB638,2,2020,Lutjanus malabaricus,2018,Sorong,380.952,311.111,133.333,10
+AB638,3,2021,Lutjanus malabaricus,2018,Sorong,279.365,311.111,133.333,10
+AB638,4,2022,Lutjanus malabaricus,2018,Sorong,184.127,311.111,133.333,10
+AB638,5,2023,Lutjanus malabaricus,2018,Sorong,133.333,311.111,133.333,10
+AB639,1,2016,Lutjanus malabaricus,2015,Sorong,1318.681,114.117,133.136,10
+AB639,2,2017,Lutjanus malabaricus,2015,Sorong,481.826,114.117,133.136,10
+AB639,3,2018,Lutjanus malabaricus,2015,Sorong,183.855,114.117,133.136,10
+AB639,4,2019,Lutjanus malabaricus,2015,Sorong,171.175,114.117,133.136,10
+AB639,5,2020,Lutjanus malabaricus,2015,Sorong,126.796,114.117,133.136,10
+AB639,6,2021,Lutjanus malabaricus,2015,Sorong,158.495,114.117,133.136,10
+AB639,7,2022,Lutjanus malabaricus,2015,Sorong,114.117,114.117,133.136,10
+AB639,8,2023,Lutjanus malabaricus,2015,Sorong,133.136,114.117,133.136,10
