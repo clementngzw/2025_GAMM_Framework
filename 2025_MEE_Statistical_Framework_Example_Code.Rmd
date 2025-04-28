@@ -1,0 +1,893 @@
+---
+output:
+  pdf_document:
+    toc: true
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+------------------------------------------------------------------------
+
+**Date:** 2025-04-29
+
+**Title:** A non-linear statistical framework to investigate changes in life history patterns within and among populations
+
+------------------------------------------------------------------------
+
+This RMarkdown file is a basic step-by-step guide for analysing otolith growth and chemistry. Please refer to Eric J. Pedersen and co-authors ([2019](https://doi.org/10.7717/peerj.6876)), *Hierarchical generalized additive models in ecology: an introduction with mgcv*, for a detailed explanation on the GAMM syntax.
+
+Please refer to Simon Wood's ([2017](https://doi.org/10.1201%2F9781315370279)) book, *Generalized Additive Models An Introduction with R, Second Edition*, for an explanation on the theory behind Generalised Additive Models and and smoothing terms.
+
+Other useful references include Simpson, ([2018](https://doi.org/10.3389/fevo.2018.00149)), *Modelling Palaeoecological Time Series Using Generalised Additive Models*, and Zuur et al., ([2009](https://doi.org/10.1007/978-0-387-87458-6)), *Mixed Effects Models and Extensions in Ecology with R*.
+
+Certain sections of the R code was adapted from the *Introduction to GAM and GAMM* course provided by Dr Alain Zuur and Dr Elena Ieno from [Highland Statistics Ltd](https://www.highstat.com/index.php).
+
+------------------------------------------------------------------------
+
+# Set up
+
+### R Markdown
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+### Working directory
+
+The following code sets the working directory to where the .Rmd file is saved.
+
+Note: Please save the .csv example files in the same folder as the .Rmd framework guide.
+
+```{r}
+
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) 
+
+```
+
+### Libraries
+
+The [mgcv](https://cran.r-project.org/package=mgcv) package provides tools for constructing Generalised Additive Mixed Models (GAMMs), the [DHARMa](https://cran.r-project.org/package=DHARMa) package produces residual diagnostics for hierarchical (multi-level/mixed) regression models, the [itsadug](https://cran.r-project.org/package=itsadug) package provides functions to visualise smooth terms from the additive models, the [bbmle](https://cran.r-project.org/package=bbmle) package allows us to perform model selection using Akaike's Information Criterion, and the [zoo](https://cran.r-project.org/package=zoo) package provides tools for linear interpolation and rolling median/means. Please refer to the respective CRAN packages for more information on the functions.
+
+All analyses were performed in R version 4.4.1.
+
+```{r include = TRUE, warning = FALSE, message = FALSE}
+
+## Data preparation
+library(plyr)
+library(tidyverse)
+library(data.table)
+
+# Checking model assumptions
+library(zoo)
+library(naniar)
+library(DHARMa)
+
+# Additive mixed models and model selection
+library(mgcv)
+library(AICcmodavg)
+library(bbmle)
+library(marginaleffects)
+library(itsadug)
+
+# R Markdown
+library(knitr)
+
+```
+
+### Functions
+
+The `Mypairs` function calculates the pairwise correlation in a given data frame and creates a scatter plot. R code from Dr Alain Zuur and Dr Elena Ieno (Highland Statistics Ltd.).
+
+```{r}
+
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+  par(usr = c(0, 1, 0, 1))
+  r <- abs(cor(x, y, use = "pairwise.complete.obs"))
+  txt <- format(c(r, 0.123456789), digits = digits)[1]
+  txt <- paste0(prefix, txt)
+  if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+  text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+
+Mypairs <- function(Z) {
+  MyVarx <- colnames(Z)
+  pairs(Z, labels = MyVarx,
+        cex.labels =  2,
+        lower.panel = function(x, y, digits=2, prefix="", cex.cor = 6) {
+          panel.cor(x, y, digits, prefix, cex.cor)}, 
+        upper.panel =  function(x, y) points(x, y, 
+                                             pch = 16, cex = 0.8, 
+                                             col = gray(0.1)))
+  #print(P)
+}
+
+
+```
+
+### Load data
+
+The data preparation steps have been removed from the Markdown file for simplicity. `fread()` function provides a faster way to read large data files, like otolith chemistry data.
+
+Note: We measured a total of 11 elements during LA-ICP-MS. However, we focused on three main elements in our case study.
+
+```{r}
+
+element_data <- fread("./element_example.csv")
+head(element_data)
+str(element_data)
+
+growth_data <- fread("./growth_example.csv")
+head(growth_data) 
+str(growth_data)
+
+```
+
+------------------------------------------------------------------------
+
+# Data preparation
+
+We often start our ablation transect outside the otolith core. The following chunk removes ablation points (element data) outside the core. As a result, this requires us to amend the distance column to start from zero for each sample. This is achieved using the `mutate(across(distance ~ first(.)))` function from the `dplyr` package.
+
+We will also create a cumulative sum distance column for aligning the element data with the otolith growth data.
+
+```{r}
+
+core_data <- growth_data %>% 
+  subset(select = c("FishID", "Core")) %>% 
+  distinct(FishID, Core)
+
+element_data <- merge(element_data, y = core_data[, c("FishID", "Core")], by = "FishID", all.x = TRUE)
+element_data <- element_data %>% 
+  group_by(FishID) %>% 
+  filter(distance > Core) %>%
+  ungroup()
+head(element_data, 5)
+
+## Amend the distance column to start from zero for each individual. 
+# c_distance represents the corrected distance. 
+element_data <- element_data %>%
+  group_by(FishID) %>%
+  mutate(across(distance, ~ . - first(.), .names = "c_distance")) %>%
+  ungroup()
+
+## Create a cumulative sum distance column for the growth data
+growth_data <- growth_data %>% 
+  group_by(FishID) %>% 
+  arrange(FishID, Age) %>% 
+  mutate(c_distance = cumsum(Width))
+growth_data$diff <- growth_data$c_distance 
+# Duplicate this for rolling join alignment
+
+element_data$c_distance <- round(element_data$c_distance, 3)
+
+```
+
+### Align element and growth data
+
+The rolling join function from the `data.table` package allows us to pinpoint the nearest ablation point that indicates a fully formed annuli (opaque zone) for each individual. This assignment allows us to perform linear interpolation between each otolith growth increment to obtain a relative Age value.
+
+```{r}
+
+## Create nearest rolling join variable in the data frame
+setDT(element_data) ; setDT(growth_data)
+element_data <- growth_data[,c("FishID", "c_distance", "Age", "Year", "Cohort", "diff")][element_data, roll = "nearest", on = .(FishID, c_distance)]
+element_data$difference <- abs(element_data$c_distance - element_data$diff) 
+# The difference variable represents the distance from the first increment. 
+
+## Minimise the difference between the location of each Age and the ablation spot
+element_data <- element_data %>% 
+  group_by(FishID, Age) %>% 
+  dplyr::mutate(Age = case_when(difference == min(difference) ~ Age))
+element_data <- element_data %>% mutate(Year = case_when(Age != 'NA' ~ Year, TRUE ~ NA)) 
+element_data <- as.data.frame(element_data)
+
+```
+
+We also noticed that we ablated a portion of the epoxy adjacent to the *sulcus acusticus* in one otolith section. This should not be included in our analyses and we replaced them with NA values.
+
+```{r}
+
+## Replace areas with cracks or damage with NAs
+element_data <- element_data %>% mutate(across(12:22, ~ if_else(distance >= 164.975 & distance <= 418.782 & FishID == "AB187", NA_real_, .)))
+
+```
+
+### Rolling median and mean
+
+The following chunk uses the `rollmedian()` and `rollmean()` functions from the `zoo` package to remove outlier values and potential data fuzziness. Missing values were also removed from the element data.
+
+```{r}
+
+### Create rolling median and mean to remove outliers and potential data fuzziness ####
+median_size <- 5
+element_data <- element_data %>%
+  group_by(FishID) %>%
+  mutate(sLi_Ca = rollmedian(Li_Ca, k = median_size, align = "center", fill = NA),
+         sB_Ca  = rollmedian(B_Ca,  k = median_size, align = "center", fill = NA),
+         sNa_Ca = rollmedian(Na_Ca, k = median_size, align = "center", fill = NA),
+         sMg_Ca = rollmedian(Mg_Ca, k = median_size, align = "center", fill = NA),
+         sP_Ca  = rollmedian(P_Ca,  k = median_size, align = "center", fill = NA),
+         sMn_Ca = rollmedian(Mn_Ca, k = median_size, align = "center", fill = NA),
+         sCu_Ca = rollmedian(Cu_Ca, k = median_size, align = "center", fill = NA),
+         sZn_Ca = rollmedian(Zn_Ca, k = median_size, align = "center", fill = NA),
+         sSr_Ca = rollmedian(Sr_Ca, k = median_size, align = "center", fill = NA),
+         sBa_Ca = rollmedian(Ba_Ca, k = median_size, align = "center", fill = NA),
+         sPb_Ca = rollmedian(Pb_Ca, k = median_size, align = "center", fill = NA))
+
+mean_size <- 10
+element_data <- element_data %>%
+  group_by(FishID) %>%
+  mutate(sLi_Ca = rollmean(sLi_Ca, k = mean_size, align = "center", fill = NA),
+         sB_Ca  = rollmean(sB_Ca,  k = mean_size, align = "center", fill = NA),
+         sNa_Ca = rollmean(sNa_Ca, k = mean_size, align = "center", fill = NA),
+         sMg_Ca = rollmean(sMg_Ca, k = mean_size, align = "center", fill = NA),
+         sP_Ca  = rollmean(sP_Ca,  k = mean_size, align = "center", fill = NA),
+         sMn_Ca = rollmean(sMn_Ca, k = mean_size, align = "center", fill = NA),
+         sCu_Ca = rollmean(sCu_Ca, k = mean_size, align = "center", fill = NA),
+         sZn_Ca = rollmean(sZn_Ca, k = mean_size, align = "center", fill = NA),
+         sSr_Ca = rollmean(sSr_Ca, k = mean_size, align = "center", fill = NA),
+         sBa_Ca = rollmean(sBa_Ca, k = mean_size, align = "center", fill = NA),
+         sPb_Ca = rollmean(sPb_Ca, k = mean_size, align = "center", fill = NA))
+
+element_data <- element_data %>% subset(select = -c(12:22)) 
+element_data <- as.data.frame(element_data)
+
+setcolorder(element_data, c('FishID','Batch','ElapsedTime_s','c_distance','Age','Year','diff','distance','Species','Region','Cohort','capture_year','capture_month','TL','SL','WW','Ca43_CPS','IntStdWv','Core'))
+                     
+element_data <- element_data %>% filter(rowSums(across(21:31, ~ is.na(.x))) < 10) 
+
+```
+
+### Linear Interpolation
+
+The following chunk performs linear interpolation of Age using the `na.approx()` function from the `zoo` package. To do so, we will first need to set the minimum Age to zero and the minimum Year to the Cohort year. `c_Age` represents a relative Age measurement between each fully formed increment. A discrete and continuous `Year` variable was also created in the chunk.
+
+`Cohort` (birth year) may also be used as a fixed or random effect in the additive modelling framework. We did not opt to do so in this study due to unequal sample sizes across cohort classes. This can be checked using `summarise(n = n_distinct())` function from the `dplyr` package.
+
+We will also remove missing values from the relative `Age` variable, as these represent ablation spots between the otolith edge and the final completed annuli.
+
+```{r}
+
+### Interpolating Age based on the missing NA values present ####
+## Define the number of decimal places in both columns
+element_data$Age <- round(element_data$Age, 10)
+element_data$Year <- round(element_data$Year, 10)
+
+## Replace the minimum Age and Cohort value
+element_data <- element_data %>%
+  group_by(FishID) %>%
+  mutate(Age = ifelse(c_distance == min(c_distance), 0, Age)) %>%
+  mutate(Year = ifelse(c_distance == min(c_distance), min(Cohort), Year)) %>%
+  ungroup()
+
+## Age interpolation
+element_data <- element_data %>%
+  group_by(FishID) %>%
+  mutate(c_Age = zoo::na.approx(Age, na.rm = FALSE)) %>%
+  ungroup()
+
+## Year interpolation
+element_data <- element_data %>%
+  group_by(FishID) %>%
+  mutate(c_Year = zoo::na.approx(Year, na.rm = FALSE)) %>%
+  ungroup()
+
+## Year fill for each increment
+element_data <- element_data %>%
+  group_by(FishID) %>%
+  fill(Year, .direction = "downup") %>%
+  ungroup() 
+
+colSums(is.na(element_data))
+
+element_data <- element_data %>% drop_na(c_Age, c_Year)
+
+element_data <- element_data %>% 
+  subset(select = -c(Age, diff, distance)) %>%
+  dplyr::rename(Age = c_Age)
+
+setcolorder(element_data, c('FishID','Batch','ElapsedTime_s','c_distance','Age','Year','c_Year','Cohort','Species','Region','TL','SL','WW','capture_year','capture_month','Ca43_CPS','IntStdWv','Core'))
+head(element_data, 5)
+
+```
+
+# Additional data preparation
+
+Important: Categorical variables must be coded as factors in the `mgcv` package.
+
+Zeros do not usually represent a true absence of trace elements in the otolith crystalline structure, but measurements below the detection limit. We replaced the zeros with an infinitesimally small value, 1e-10.
+
+We further truncated the growth data due to limited sample sizes past a certain Age or Year.
+
+```{r}
+
+element_data[c('FishID','Species','Region')] <- lapply(element_data[c('FishID','Species','Region')], as.factor) 
+
+element_data[20:30][element_data[20:30] == 0] <- 0.0000000001 
+
+## Truncate data based on the sample depth per Year and Region class bins
+growth_data %>% 
+  group_by(Region) %>% 
+  summarise(n = n()) 
+
+element_data <- element_data %>% filter(!((Region == "Riau Archipelago" & Year <= "2016") | (Region == "Sorong" & Year <= "2006")))
+element_data <- element_data %>% filter(Age <= 12) 
+
+```
+
+------------------------------------------------------------------------
+
+# Example - Strontium data
+
+### Visualise data
+
+Note: The inclusion of `pch = '.'` in `geom_point()` allows for quicker rendering of points in the `ggplot2` package.
+
+```{r}
+
+element_data %>% 
+  ggplot(aes(x = c_distance, y = sSr_Ca, colour = FishID, group = FishID))+ 
+  geom_point(size = 0.1, alpha = 0.1, pch = '.')+
+  geom_line(linewidth = 0.1, alpha = 0.1)+
+  facet_wrap(Species ~ Region)+
+  theme_bw()+
+  theme(legend.position = "none")
+
+```
+
+### Collinearity among covariates
+
+There is no collinearity between Age and Year.
+
+```{r}
+
+Mypairs(element_data[,c("Age", "Year")]) 
+
+```
+
+### Plot E:Ca relationship
+
+There are clear non-linear relationships between the response variable and the continuous covariates, Age and Year. This suggests that we should use Generalised Additive Models.
+
+```{r, warning = FALSE, fig.show = "hold", out.width = "50%"}
+
+element_data %>%
+  ggplot(aes(y = sSr_Ca, x = Age, colour = Region)) +
+  geom_point(pch = '.') + 
+  ggtitle("Relationship between Sr and c_Age") + 
+  geom_smooth(aes(group = Region), method = 'gam', colour = 'black') + 
+  theme_bw()
+
+element_data %>%
+  ggplot(aes(y = sSr_Ca, x = Year, colour = Region)) +
+  geom_point(pch = '.') + 
+  ggtitle("Relationship between Sr and Year") + 
+  geom_smooth(aes(group = Region), method = 'gam', colour = 'black') + 
+  theme_bw()
+
+```
+
+### Individual variation in Sr
+
+The box plots indicate that there is an individual effect. We need to account for this individual-specific variation in element data using random effects, in addition to the non-linear relationship between response and predictor variables.
+
+```{r}
+
+element_data %>%
+  ggplot(aes(y = sSr_Ca, x = FishID)) +
+  geom_boxplot(alpha = 0.5) + 
+  geom_hline(yintercept = mean(element_data$sSr_Ca), colour = 'red', linewidth = 0.5, linetype = 'dashed') +
+  theme_bw() + 
+  theme(axis.text.x = element_blank())
+
+```
+
+------------------------------------------------------------------------
+
+# Hierarchical GAMM Framework
+
+The aim of this study is to investigate the variables influencing changes in otolith element composition (E:Ca) of tropical snapper populations across the Indo-Pacific region. Generalised Additive Mixed Models (GAMMs) are implemented via the `mgcv` package in R to partition variance in the response variable by Region and Age.
+
+### Key model considerations
+
+1.  **Non-Linear Relationships:** Exploratory plots indicate clear non-linear relationships between E:Ca and the continuous covariates. This suggests that the standard linear models may not be appropriate for the data. Smoothers, typically specified using the default `bs = 'tp'` function in `mgcv`, allow for the modelling of non-linear effects. The `k` parameter refers to the maximum allowable degrees of freedom for the smoother, controlling the flexibility of the model. Although setting a high `k` can better capture the complexity of the data, it comes at a computational cost. It is important to note, as Dr Alain Zuur and Dr Gavin Simpson mentioned, that it can be difficult to interpret highly complex wiggly patterns when `k > 10`. Therefore, selecting an appropriate `k` is a critical balance between model accuracy and interpretability.
+
+2.  **Distribution and Link Function:** The models use a Gamma distribution with a log-link function (`family = 'Gamma(link = "log")'`), which is appropriate given that the response variable consists of continuous positive values. Zero values are replaced with a very small value (i.e., 1e-10), which represents values below the detection limit, rather than a true absence of data.
+
+3.  **Random effects:** Random effects are specified using the `bs = 're'` function, which accounts for the individual-specific variation in data. This allows the model to better account for group-level differences in E:Ca values.
+
+4.  **Computational efficiency:** Due to the large size of the data set (around 120,000 observations), the `bam()` function was used instead of `gam()` to reduce computation time. `gam()` is recommended for smaller datasets, where precision is key, and `bam()` for larger datasets to improve computational efficiency by using approximations and faster algorithms. Additionally, the `select = TRUE` option penalises functions in the null space of the penalty matrices for each smooth term (Pedersen et al., [2019](https://doi.org/10.7717/peerj.6876)).
+
+5.  **Penalties and Derivatives:** A penalty can also be set for the squared first derivative of the function, by specifying `m = 1`, rather than the second derivative, which can help to reduce collinearity between the global smoother and the group-specific terms. This reduces uncertainty around the global smoother, thereby improving model stability (Pedersen et al., [2019](https://doi.org/10.7717/peerj.6876)).
+
+### Key questions during model construction
+
+-   Should each group (e.g., Region) have its own smoother, or will a common (global) smoother suffice?
+-   Should smoothers for each group have the same flexibility, or should they differ?
+-   Should smoothers for each group have similar shapes, or can they differ?
+
+For further details, see Pedersen *et al* ([2019](https://doi.org/10.7717/peerj.6876)), *Hierarchical generalized additive models in ecology: an introduction with mgcv* and Gavin Simpson's [Stack Exchange discussion](https://stats.stackexchange.com/questions/637423/conceptual-interpretation-of-bs-fs-and-by-term-in-gam) (Last accessed: 27 February 2025).
+
+------------------------------------------------------------------------
+
+# Strontium
+
+### Stage 1 - Demographic patterns
+
+#### Base model 1 - Global Age smoother (G model)
+
+***H~A~*****:** There are significant non-linear effects of Age, random effects of FishID (individual), and the interaction of FishID and Age, on otolith Sr.
+
+Thin plate regression splines are specified using `bs = 'tp'`, although [other](https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/smooth.terms.html) spline functions can be also be used (e.g., cubic regression spline, P-splines). The `k` parameter was set to 24; a biologically informed decision that is double the maximum truncated age of 12 to account for intra-annual variation in otolith element patterns.
+
+`bs = 're'` was included in the model to account for individual-specific variation in otolith element patterns.
+
+-   The inclusion of `s(FishID, bs = 're')` creates random intercepts (deviations from the overall mean, the model constant term) for each level of the factors. In linear mixed-effects model syntax (`lme4`), this would be equivalent to `(1 | FishID)`.
+
+-   `s(FishID, Age, bs = 're')` adjusts the slope of the trend of a numeric predictor for each level of the factor. This allows the effect of Age to vary for each fish. In linear mixed-effects model syntax (`lme4`), this would be equivalent to `(Age | FishID)`.
+
+`select = TRUE` penalises the linear components of each smoother term. `method = 'fREML'` produces fast Restricted Maximum Likelihood Estimations. `family = 'Gamma(link = "log")'` calls the Gamma distribution in `mgcv` with a log-link function. `m = 2` sets a penalty for the squared second derivative of the smooth function.
+
+```{r}
+
+M1a <- bam(sSr_Ca ~ 
+             s(Age, k = 24, bs = "tp", m = 2) +
+             s(FishID, bs = 're') + 
+             s(FishID, Age, bs = 're'), 
+           select = TRUE, 
+           method = "fREML", 
+           family = Gamma(link = "log"),
+           data = element_data) 
+
+```
+
+The numerical output of M1a indicates that there is a significant relationship between Sr:Ca and Age. There are no clear patterns in the residual distribution.
+
+However, we should also check whether the model is properly specified using the `k.check()` and `gam.check()` functions. The former performs a basic dimension check, while the latter produces residual plots in addition to calling on `k.check()`. The p-value in `gam.check()` is computed by simulation: the residuals are randomly re-shuffled `k.rep` times to obtain the null distribution of the differencing variance estimator, provided there is no pattern in the residuals.
+
+We are primarily interested to know whether the model is wiggly enough. If the effective degrees of freedom (edf) is close to k, it means that the trade-off between smoothness and wiggliness is not balanced.
+
+```{r, fig.show = "hold", out.width = "50%"}
+
+## Check numerical output
+summary(M1a)
+
+## Check residual distribution
+plot(fitted(M1a), residuals(M1a)) 
+
+## Check diagnostics
+set.seed(100) ; k.check(M1a)
+set.seed(100) ; gam.check(M1a)
+
+## Preliminary plots
+plot.gam(M1a, all.terms = T)
+
+```
+
+Note: The `plot.gam()` function plots the component smooth functions on the scale of the linear predictor.
+
+```{r}
+
+p <- marginaleffects::plot_predictions(M1a, condition = c("Age"), type = 'response') 
+p
+
+```
+
+#### Model 2 - Global Age smoother (G model)
+
+***H~A~*****:** There are significant non-linear effects of Age, random effects of Region, FishID (individual), and the interaction of FishID and Age, on otolith Sr.
+
+```{r}
+
+M1b <- bam(sSr_Ca ~ 
+             s(Age, k = 24, bs = "tp", m = 2) + 
+             s(Region, bs = 're') + 
+             s(FishID, bs = 're') + 
+             s(FishID, Age, bs = 're'), 
+           select = TRUE, 
+           method = "fREML", 
+           family = Gamma(link = "log"), 
+           data = element_data)
+
+```
+
+#### Model 3 - Global Age smoother and Region-level factor Age smoothers with identical wiggliness (GS model)
+
+***H~A~*****:** There are significant non-linear effects of Age, Region-level Age smooth functions with identical wiggliness, random effects of FishID (individual), and the interaction of FishID and Age, on otolith Sr.
+
+The GS model (sensu Pedersen et al., 2019) tests the amount of variation in E:Ca that is explained by the shared Age smoother, plus fully penalised (2nd order derivative penalty) group-level Region smooth functions of Age. A fully penalised factor smooth means that there are no functions for which the penalty has no effect.
+
+As Gavin Simpson describes in the following StackExchange links, see [link 1](https://stats.stackexchange.com/questions/637423/conceptual-interpretation-of-bs-fs-and-by-term-in-gam) and [link 2](https://stats.stackexchange.com/questions/482509/in-mgcvgam-what-is-the-difference-between-sx-by-cat-and-sx-cat-bs-fs) (Last accessed: 27 February 2025), the family of smooths (`bs = "fs"`) function created in this basis share the same smoothing parameter and have approximately the same wiggliness. This can be thought of as being draws from a Gaussian distribution centred on 0 with some standard deviation (which is inversely proportional to the smoothing parameter for the group means or the group slopes [linear functions])".
+
+```{r}
+
+M1c <- bam(sSr_Ca ~ 
+             s(Age, k = 24, bs = "tp", m = 2) + 
+             s(Age, Region, k = 24, bs = "fs", m = 2) + 
+             s(FishID, bs = 're') + 
+             s(FishID, Age, bs = 're'), 
+           select = TRUE, 
+           method = "fREML", 
+           family = Gamma(link = "log"), 
+           data = element_data)
+
+```
+
+#### Model 4 - Global Age smoother and Region-level Age smoothers with different wiggliness (GI model)
+
+***H~A~*****:** There are significant non-linear effects of Age, Region-level Age smooth functions with different wiggliness, random effects of Region, FishID (individual), and the interaction of FishID and Age, on otolith Sr.
+
+The GI model tests the amount of variation in E:Ca that is explained by the shared Age smoother, plus group-level Region smooth functions of Age. Unlike `bs = "fs"`, the factor `by` smooth variant creates a separate smoothing parameter for each level of Region. This means that one smoothing parameter may be wiggly, while the other may produce a smooth pattern.
+
+Region-level random intercepts (or factor) must be specified in the model, as they are by default not incorporated in the `by =` variable smooth term.
+
+```{r}
+
+M1d <- bam(sSr_Ca ~ 
+             s(Age, k = 24, bs = "tp", m = 2) +
+             s(Age, by = Region, k = 24, bs = "tp", m = 2) +
+             s(Region, bs = 're') + 
+             s(FishID, bs = 're') + 
+             s(FishID, Age, bs = 're'), 
+           select = TRUE, 
+           method = "fREML", 
+           family = Gamma(link = "log"),
+           data = element_data) 
+
+```
+
+**Important note:**
+
+The choice of *m* alters the penalty to smooth terms and changes how much your GAM restricts wiggliness.
+
+Pedersen *et al* ([2019](https://doi.org/10.7717/peerj.6876)) penalises the squared first derivative of the `s(Age, by = Region)` term using `m = 1` to reduce collinearity between the global smoother and group-specific terms, which has been reported to produce uncertainty around the shared smooth term. However, we noticed that setting a penalised squared first derivative `m = 1` can sometimes create a smooth function that overfits the data when there are a *sparse* number of data points (i.e., fewer otolith E:Ca observations in older fish).
+
+Dr Shawn Hemelstrand describes in this StackExchange [link](https://stats.stackexchange.com/questions/625419/choice-of-m-order-of-derivative-for-mgcv-splines) (Last accessed: 27 February 2025) that you should try to fit your data to the functional relationship that is best defined by the theory and data driving that function, and try when possible to not overfit the data, regardless of the selection of *m*.
+
+#### Model 5 - Region-level factor Age smoothers with identical wiggliness (S model)
+
+***H~A~*****:** There are significant non-linear effects of Region-level Age smooth functions with identical wiggliness, random effects of FishID (individual), and the interaction of FishID and Age, on otolith Sr.
+
+One may not be particularly interested in the effects of individual Regions, which is assessed using the `by` smooth. Instead, we should think of this function as a single Age smoother superimposed across Regions to estimate the variation within and between groups.
+
+```{r}
+
+M1e <- bam(sSr_Ca ~ 
+             s(Age, Region, k = 24, bs = "fs", m = 2) +
+             s(FishID, bs = 're') + 
+             s(FishID, Age, bs = 're'), 
+           select = TRUE, 
+           method = "fREML", 
+           family = Gamma(link = "log"),
+           data = element_data) 
+
+```
+
+#### Model 6 - Region-level Age smoothers with different wiggliness (I model)
+
+***H~A~*****:** There are significant non-linear effects of Region-level Age smooth functions with different wiggliness, random effects of Region, FishID (individual), and the interaction of FishID and Age, on otolith Sr.
+
+Unlike `bs = "fs"`, the `by` smooth variant creates a separate smoothing parameter for each level of Region. We are also assuming there is no shared (phylogenetic) effect present.
+
+```{r}
+
+M1f <- bam(sSr_Ca ~ 
+             s(Age, by = Region, k = 24, bs = "tp", m = 2) +
+             s(Region, bs = 're') + 
+             s(FishID, bs = 're') + 
+             s(FishID, Age, bs = 're'), 
+           select = TRUE, 
+           method = "fREML", 
+           family = Gamma(link = "log"),
+           data = element_data) 
+
+```
+
+#### Model selection
+
+The following chunk performs model selection using Akaike's Information Criterion (AIC) to compare our additive models. Gavin Simpson describes in the following Stack Exchange [link](https://stats.stackexchange.com/questions/552880/by-group-random-effect-gam) that Akaike's Information Criterion for small sample sizes (AICc) should not be used for GAMs.
+
+Here, we used the `AICtab` function from the `bbmle` package to compare additive models. The optimal model structure is M1d (GI model).
+
+```{r}
+
+bbmle::AICtab(M1a, M1b, M1c, M1d, M1e, M1f, base = T, logLik = T, weights = T)
+## Optimal model structure is M1d. 
+
+summary(M1d)
+
+```
+
+------------------------------------------------------------------------
+
+### Stage 2 - Temporal effects
+
+The following chunk fits a discrete Year slope and Region random intercept to the optimal demographic model to investigate the presence of temporal patterns in otolith E:Ca. Model selection using AIC was then used to identify the optimal model structure to otolith chemistry data.
+
+Model selection indicates that the null model without temporal effects provides a marginally better fit for otolith Sr:Ca.
+
+```{r}
+
+M2 <- bam(sSr_Ca ~ 
+            s(Age, k = 24, bs = "tp", m = 2) +
+            s(Age, by = Region, k = 24, bs = "tp", m = 2) +
+            s(Region, bs = 're') + 
+            s(Region, Year, bs = 're') + 
+            s(FishID, bs = 're') + 
+            s(FishID, Age, bs = 're'), 
+          select = TRUE, 
+          method = "fREML", 
+          family = Gamma(link = "log"),
+          data = element_data) 
+
+```
+
+```{r}
+
+bbmle::AICtab(M1d, M2, base = T, logLik = T, weights = T)
+
+```
+
+------------------------------------------------------------------------
+
+# Checking the optimal model
+
+For simplicity, we will refit the optimal model as `Lm_Sr`. The following chunk checks the numerical output, residual plot, diagnostic information, and plots the component smooth functions on the scale of the linear predictor.
+
+The `plot_predictions()` function from the `marginaleffects` package is used to plot the effects at the scale of the response variable, while setting the group-specific random effects to zero.
+
+```{r, fig.show = "hold", out.width = "50%"}
+
+## Construct the optimal model for Sr
+Lm_Sr <- M1d
+
+## Check numerical output 
+summary(Lm_Sr)
+anova(Lm_Sr)
+
+## Check residual plot
+plot(fitted(Lm_Sr), residuals(Lm_Sr)) 
+
+## Check diagnostic information for our optimal model
+set.seed(100) ; k.check(Lm_Sr)
+set.seed(100) ; gam.check(Lm_Sr)
+
+## Generate preliminary plots
+plot.gam(Lm_Sr, all.terms = T)
+
+```
+
+```{r}
+
+## Plot effects on response scale
+p <- marginaleffects::plot_predictions(Lm_Sr, condition = c("Age","Region"), type = 'response') + theme_bw()
+p
+
+```
+
+### Model validation
+
+The following chunk assesses the numerical output from the optimal GAMM. The r parameter and sigma of the random effects are extracted from the fitted gamma GAMM. We will also extract and plot the Pearson residuals against the gamma fitted values to assess if there are any underlying patterns.
+
+The code is adapted from the *Introduction to GAM and GAMM* course material by Highland Statistics Ltd.
+
+```{r, fig.show = "hold", out.width = "50%"}
+
+## Extract the r parameter from the fitted gamma GAMM model
+# See scale estimated from `summary()` 
+summary(Lm_Sr)
+
+r <- 1 / 0.0094024
+r 
+
+#  sSr_Ca ~ Gamma(mu_ijk, r =  106.3558) 
+#  E(sSr_Ca)   = mu_ijk
+#  var(sSr_Ca) = mu_ijk ^2 / 106.3558
+
+## Attain the sigma of the random effect of FishID
+gam.vcomp(Lm_Sr)
+
+## Perform model validation for the Gamma GAMM 
+element_data$E  <- resid(Lm_Sr, type = "pearson")  
+# Pearson residual values
+
+element_data$mu <- fitted(Lm_Sr)                   
+# Gamma fitted values
+
+## Plot residuals versus fitted values
+element_data %>% 
+  filter(Age < 12) %>%
+  ggplot(aes(y = E, x = mu)) + 
+  geom_point(size = 0.5, alpha = 0.3) +
+  xlab("Fitted values") + ylab("Residuals") +
+  theme_bw()
+
+# Plot observed versus fitted values
+element_data %>% 
+  ggplot(aes(y = sSr_Ca, x = mu)) +
+  geom_point(size = 0.5, alpha = 0.5) +
+  xlab("Fitted values") + ylab("sSr_Ca") + 
+  theme_bw()
+
+```
+
+```{r}
+
+## Plot residuals against Age data 
+element_data %>%
+  ggplot(aes(y = E, x = Age, colour = Region)) + 
+  geom_point(size = 0.5, alpha = 0.5) + 
+  geom_smooth(colour = 'black') +
+  facet_wrap(.~Region) +
+  xlab("Age") + ylab("Residuals") + 
+  theme_bw()
+
+```
+
+There are no clear underlying patterns in the otolith chemistry data.
+
+### Simulate residuals
+
+The following chunk simulates residuals from the fitted model to assess for uniformity and check for outliers in the data. While the plots seem to indicate the presence of outliers, non-uniformity and dispersion in the data, visual observations suggest that this is okay.
+
+According to the package vignette for DHARMa, Florian Hartig states in the "General remarks on interpreting residual patterns and tests" section of the following [link](https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#general-remarks-on-interperting-residual-patterns-and-tests) that random effect estimates are excluded in the predictions when plotting residual versus predicted data. He adds that DHARMa residuals often show a slight pattern in the residuals even if the model is correctly specified, and tests for this can get significant for large sample sizes.
+
+```{r, message = FALSE, fig.show = "hold", out.width = "50%"}
+
+Lm_Sr_Residuals <- simulateResiduals(fittedModel = Lm_Sr, plot = FALSE)
+
+par(mfrow = c(1,1))
+plotQQunif(Lm_Sr_Residuals, 
+           testUniformity = TRUE, 
+           testOutliers = TRUE, 
+           testDispersion = TRUE) 
+
+DHARMa::plotResiduals(Lm_Sr_Residuals, quantreg = TRUE, smoothScatter = TRUE) 
+
+plotResiduals(Lm_Sr_Residuals, form = element_data$Age, smoothScatter = TRUE) 
+
+```
+
+### Check for dependency in random effects
+
+The following chunk extracts the random effects and checks whether they are independent and normally distributed.
+
+According to the course notes from Highland Statistics Ltd., the idea is to specify a data frame with only unique values for `s(FishID)`, with everything else set to a constant value. The `predict()` function is then used to predict values of the random effects and their corresponding standard errors. The estimated random effects and their standard errors are used to check for dependency among the random effects.
+
+```{r, results = 'hide'}
+
+coef(Lm_Sr)
+
+```
+
+```{r}
+
+data2 <- data.frame(FishID = levels(element_data$FishID))
+data2$Age <- mean(element_data$Age)
+data2$Region <- "Riau Archipelago"
+
+## Predict values of random effects and their SE,
+p.Lm_Sr <- predict(Lm_Sr, data2, 
+                   type = "terms", se.fit = TRUE)
+
+## Extract the estimated random effects and their standard errors
+data2$ai <- p.Lm_Sr[["fit"]][ , "s(FishID)"]
+data2$ai.se <- p.Lm_Sr[["se.fit"]][ , "s(FishID)"]
+
+## Plot in a dotchart
+data2$rowID <- 1:nrow(data2)
+
+p <- data2 %>% 
+  ggplot(aes(x = ai, y =rowID)) +
+  geom_point(size = 1, col = grey(0.5)) +
+  geom_errorbarh(aes(y = rowID, xmax = ai + 1.96 * ai.se, xmin = ai - 1.96 * ai.se), col = "blue", height = 0.05, alpha = 0.2) +
+  geom_vline(xintercept = 0, lty = 2, col = "red") +
+  xlab("Estimated random effect") + ylab("FishID") +
+  scale_x_continuous(limits = c(-0.75, 0.75), breaks = c(-0.75, -0.50, -0.25, 0.00, 0.25, 0.50, 0.75), labels = c(-0.75, -0.50, -0.25, 0.00, 0.25, 0.50, 0.75)) +
+  theme_bw()
+p
+
+```
+
+There is no clear pattern in this dot chart, which is good, as we assume that the random effects are independent.
+
+------------------------------------------------------------------------
+
+# Model visualisation
+
+The `plot_smooth` function from the `itsadug` package plots the fitted effects from the optimal additive model. The argument `transform` accepts a function for transforming the fitted values into the original scale. The argument `rm.ranef` cancels the contribution of random effects.
+
+We will then predict how Sr varies with Age for each Region-level after removing the effect of random effects, which is specified as an NA value in the "Lm_Sr_Age_Data" data frame. The code is adapted from the *Introduction to GAM and GAMM* course material by Highland Statistics Ltd.
+
+Note: Each smooth term should be excluded in the same way it was labelled in `summary()`, not during model construction. This can be checked using `sapply(Lm_Sr$smooth,"[[","label")`.
+
+```{r, fig.show = "hold", out.width = "50%"}
+
+### Preliminary plot 
+par(mfrow = c(1, 1))
+itsadug::plot_smooth(Lm_Sr, view = "Age", plot_all = c("Region"), rm.ranef = FALSE) 
+# Plot without random effects
+
+itsadug::plot_smooth(Lm_Sr, view = "Age", plot_all = c("Region"), transform = exp, rm.ranef = FALSE) 
+# Transform to original scale
+
+```
+
+```{r, warning = FALSE}
+
+## Plot changes in Sr across Age for each Region. 
+Lm_Sr_Age_Data <- ddply(element_data, .(Region), summarize, 
+                        Age = seq(min(Age), max(Age), length = 1000)) 
+Lm_Sr_Age_Data$FishID <- "NA"
+Lm_Sr_Age_Data$FishID <- factor(Lm_Sr_Age_Data$FishID)
+
+```
+
+Ignore the `NA` warning.
+
+Note: You will need to calculate average Year value and include it in the predicted model if the temporal term shows up as important.
+
+```{r}
+
+## Predict how Sr varies with Age for each Region after removing random effects
+sapply(Lm_Sr$smooth,"[[","label") 
+Lm_Sr_PredictAge <- predict.bam(Lm_Sr, 
+                                newdata = Lm_Sr_Age_Data, 
+                                exclude = c("s(Region)",
+                                            "s(FishID)",
+                                            "s(FishID,Age)"),
+                                se.fit = TRUE)
+
+Lm_Sr_Age_Data$mu <- exp(Lm_Sr_PredictAge$fit)
+Lm_Sr_Age_Data$ul <- exp(Lm_Sr_PredictAge$fit + 1.96 * Lm_Sr_PredictAge$se.fit )
+Lm_Sr_Age_Data$ll <- exp(Lm_Sr_PredictAge$fit - 1.96 * Lm_Sr_PredictAge$se.fit ) 
+
+Lm_Sr_Age_Data <- Lm_Sr_Age_Data %>% filter(Age <= 12)
+
+```
+
+The following code plots the predicted marginal effect of the demographic effects on Sr, while setting all random effects to a constant value.
+
+```{r}
+
+### Plot marginal effect of Age:Region on Sr:Ca, setting all random effect values to a constant value. 
+plot1 <- Lm_Sr_Age_Data %>%
+  ggplot(aes(x = Age, y = mu)) + 
+  geom_line(aes(colour = Region)) + 
+  geom_ribbon(aes(ymax = ul, ymin = ll, fill = Region), alpha = 0.5) + 
+  scale_color_manual(values=c("#E69F00","#0072B2")) + 
+  scale_fill_manual(values=c("#E69F00","#0072B2")) +
+  labs(y = 'Predicted Sr:Ca (mmol/mol)') + 
+  scale_x_continuous(limits = c(0, 12), breaks = c(0,3,6,9,12), labels = c("0","3","6","9","12")) +
+  scale_y_continuous(limits = c(180, 800), breaks = c(200, 400, 600, 800), labels = c("200", "400", "600", "800")) +
+  theme(axis.text = element_text(size=16),
+        axis.title = element_text(size=20),
+        axis.line = element_line(colour = "grey15", linewidth=0.3), 
+        legend.title=element_text(size=16), 
+        legend.text=element_text(size=14),
+        legend.background = element_rect(fill='white',linewidth=0.5,linetype="solid",colour ="grey15"),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey85", linewidth=0.15),
+        panel.grid.minor = element_blank(),
+        plot.margin = margin(1.0, 1.0, 1.0, 1.0, "cm"))
+plot1 
+
+## Save file as .png for publication
+#ggsave("plot1.png", plot = plot1, dpi = 300, width = 297, height = 210, units = "mm")
+
+```
+
+------------------------------------------------------------------------
+
+For any code-related questions, please contact the corresponding author.
+
+Thank you.
+
+# End
+
+------------------------------------------------------------------------
