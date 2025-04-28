@@ -1,4 +1,4 @@
 # 2025_GAMM_Framework
 
-Author: Ng Zhong Wang Clement
+Title: A non-linear statistical framework to investigate changes in life history patterns within and among populations 
 
